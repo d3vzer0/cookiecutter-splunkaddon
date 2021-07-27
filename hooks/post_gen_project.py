@@ -1,31 +1,32 @@
 import os
-import sys
-import shutil
 from collections import OrderedDict
 from jinja2 import Template
 
-MODULE_TEMPLATE = f'{os.getcwd()}/bin/input_module_example_input.py'
-INPUT_TEMPLATE = f'{os.getcwd()}/bin/example_input.py'
-REST_CONFIG_TEMPLATE = f'{os.getcwd()}/bin/{{ cookiecutter.addon_config_prefix }}_rh_example_input.py'
+# Specify templates which need to be created multiple times based on inputs count
+# Set current working directory as base path
+BASE_PATH = os.getcwd()
+# Specify unique template files for Splunk inputs
+DYNAMIC_TEMPLATES = {
+    f'{BASE_PATH}/bin/input_module_example_input.py': 'example_input',
+    f'{BASE_PATH}/bin/example_input.py': 'example_input',
+    f'{BASE_PATH}/bin/{{ cookiecutter.addon_config_prefix }}_rh_example_input.py': 'example_input'
+}
 
-def create_dynamic_file(template_path, output_path, input_name, input_details):
-    with open(template_path, 'r') as template_file:
-        template_content = Template(template_file.read())
-        template_rendered = template_content.render(
-            cookiecutter={{cookiecutter}},
-            input={'name': input_name, 'details': input_details}
-        )
-
-    with open(output_path, 'w') as output_file:
-        output_file.write(template_rendered)
-  
-
+# Load all configured inputs and render + save multiple template files
 for input, options in {{ cookiecutter.addon_inputs }}.items():
-    module_output_path = MODULE_TEMPLATE.replace('input_module_example_input', f'input_module_{input}')
-    input_output_path = INPUT_TEMPLATE.replace('example_input', input)
-    rest_config_output_path = REST_CONFIG_TEMPLATE.replace('example_input', input)
-
-    create_dynamic_file(MODULE_TEMPLATE, module_output_path, input, options)
-    create_dynamic_file(INPUT_TEMPLATE, input_output_path, input, options)
-    create_dynamic_file(REST_CONFIG_TEMPLATE, rest_config_output_path, input, options)
-
+    for template_path, placeholder in DYNAMIC_TEMPLATES.items():
+        # Replace generic name with input specific name
+        output_path = template_path.replace(placeholder, input)
+        with open(template_path, 'r') as template_file:
+            # Open and render template file
+            template_content = Template(template_file.read())
+            template_rendered = template_content.render(
+                cookiecutter={{cookiecutter}},
+                input={'name': input, 'details': options}
+            )
+        # Save rendered template to input-specific output path
+        with open(output_path, 'w') as output_file:
+            output_file.write(template_rendered)
+  
+# Delete templates after rendering + saving every input
+[os.remove(template_path) for template_path in DYNAMIC_TEMPLATES.keys()]
