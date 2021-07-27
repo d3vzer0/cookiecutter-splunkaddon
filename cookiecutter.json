@@ -51,7 +51,7 @@
         "*appserver/static/js/build/*.js",
         "*appserver/static/js/build/*.txt",
         "*bin/add_on_deps",
-        "*default",
+        "*default/data",
         "*bin/*_rh_example_input.py",
         "*bin/input_module_example_input.py",
         "*bin/example_input.py"
