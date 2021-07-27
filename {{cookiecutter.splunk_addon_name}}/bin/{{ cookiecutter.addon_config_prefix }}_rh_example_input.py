@@ -35,17 +35,17 @@ fields = [
     ), 
     {% for opt, config in input.details.parameters.items() -%}
     field.RestField(
-        '{{ input.name }}',
+        '{{ opt }}',
         required={% if config.required == "true" %}True{% else %}False{% endif %},
         encrypted={% if config.encrypted == "true" %}True{% else %}False{% endif %},
-        default='{{ config.default }}',
+        default={% if config.default == "None" %}None{% else %}'{{ config.default}}'{% endif %},
         {%- if config.type == "text" %}
         validator=validator.String(
             min_len=0, 
             max_len=8192, 
         )
         {% endif -%}
-    ), 
+    ),
     {% endfor %}
     field.RestField(
         'global_account',

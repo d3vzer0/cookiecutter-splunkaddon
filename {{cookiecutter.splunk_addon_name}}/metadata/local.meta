@@ -1,14 +1,8 @@
 [props/example_sourcetype]
-owner = jdreijer
 version = 8.2.1
-modtime = 1626956655.134216000
 
-[props/source%3A%3A...ta-example-add-on%2A.log%2A]
-owner = jdreijer
+[props/source%3A%3A...{{ cookiecutter.addon_config_prefix }}%2A.log%2A]
 version = 8.2.1
-modtime = 1626956655.692117000
 
-[props/source%3A%3A...ta_example_add_on%2A.log%2A]
-owner = jdreijer
+[props/source%3A%3A...{{ cookiecutter.addon_config_prefix }}%2A.log%2A]
 version = 8.2.1
-modtime = 1626956656.338186000

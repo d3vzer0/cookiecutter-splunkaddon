@@ -1,4 +1,6 @@
 {
+    "author_name": "Your Name",
+    "author_email": "yourname@example.org",
     "splunk_addon_name": "TA-my-splunkaddon",
     "splunk_addon_label": "My Splunk Addon",
     "addon_config_prefix": "{{ cookiecutter.splunk_addon_name | replace('-','_')}}",

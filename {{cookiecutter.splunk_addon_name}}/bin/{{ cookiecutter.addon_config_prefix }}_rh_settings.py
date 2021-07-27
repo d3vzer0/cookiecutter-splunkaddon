@@ -31,7 +31,7 @@ fields_additional_parameters = [
         '{{ key }}',
         required={% if value.required == "true" %}True{% else %}False{% endif %},
         encrypted={% if value.encrypted == "true" %}True{% else %}False{% endif %},
-        default='{{ value.default }}',
+        default={% if value.default == "None" %}None{% else %}'{{ value.default}}'{% endif %},
         {%- if value.type == "text" %}
         validator=validator.String(
             min_len=0, 
