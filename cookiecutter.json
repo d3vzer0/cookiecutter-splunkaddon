@@ -1,0 +1,58 @@
+{
+    "splunk_addon_name": "TA-my-splunkaddon",
+    "splunk_addon_label": "My Splunk Addon",
+    "addon_config_prefix": "{{ cookiecutter.splunk_addon_name | replace('-','_')}}",
+    "addon_config": {
+        "base_uri": {
+            "type": "text",
+            "help": "Enter the base url for this addon",
+            "label": "Base URI",
+            "required": "true",
+            "encrypted": "false",
+            "default": ""
+        }
+    },
+    "addon_inputs": {
+        "testinput1": {
+            "description": "A test input for Splunk",
+            "parameters": {
+                "samplequery1": {
+                    "type": "string",
+                    "required": "True",
+                    "encrypted": "True",
+                    "default": "None"
+                },
+                "samplequery2": {
+                    "type": "string",
+                    "required": "True",
+                    "encrypted": "True",
+                    "default": "None"
+                }
+            }
+        },
+        "testinput2": {
+            "description": "A test input for Splunk",
+            "parameters": {
+                "samplequery": {
+                    "type": "string",
+                    "required": "True",
+                    "encrypted": "True",
+                    "default": "None"
+                }
+            }
+        }
+    },
+    "_copy_without_render": [
+        "*appserver/templates",
+        "*appserver/static/css",
+        "*appserver/static/img",
+        "*appserver/static/js/build/*.js",
+        "*appserver/static/js/build/*.txt",
+        "*bin/add_on_deps",
+        "*default",
+        "*bin/*_rh_example_input.py",
+        "*bin/input_module_example_input.py",
+        "*bin/example_input.py"
+    ]
+}
+
