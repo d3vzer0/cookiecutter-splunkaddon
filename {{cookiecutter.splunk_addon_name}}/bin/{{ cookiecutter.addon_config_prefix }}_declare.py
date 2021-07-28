@@ -11,7 +11,7 @@ import re
 
 
 py_version = "aob_py3"
-ta_name = '{{ cookiecutter.addon_config_prefix }}'
+ta_name = '{{ cookiecutter.splunk_addon_name }}'
 ta_lib_name = 'add_on_deps'
 
 pattern = re.compile(r"[\\/]etc[\\/]apps[\\/][^\\/]+[\\/]bin[\\/]?$")

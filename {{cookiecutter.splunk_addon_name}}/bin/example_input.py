@@ -48,7 +48,7 @@ class ModInput{{input.name}}(modinput_wrapper.base_modinput.BaseModInput):
 
         {% for opt, config in input.details.parameters.items() -%}
         scheme.add_argument(smi.Argument("{{ opt }}",
-            title="{{ config.label }}",
+            title="{{ opt }}",
             description="{{ config.help }}",
             required_on_create=False,
             required_on_edit=False)
