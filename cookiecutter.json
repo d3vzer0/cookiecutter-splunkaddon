@@ -1,8 +1,8 @@
 {
-    "author_name": "Your Name",
-    "author_email": "yourname@example.org",
-    "splunk_addon_name": "TA-my-splunkaddon",
-    "splunk_addon_label": "My Splunk Addon",
+    "author_name": "Joey Dreijer",
+    "author_email": "jdreijer@schubergphilis.com",
+    "splunk_addon_name": "TA-jamf-sync",
+    "splunk_addon_label": "JAMF Add-On for Splunk",
     "addon_config_prefix": "{{ cookiecutter.splunk_addon_name | replace('-','_')}}",
     "addon_config": {
         "base_uri": {
@@ -15,31 +15,27 @@
         }
     },
     "addon_inputs": {
-        "testinput1": {
-            "description": "A test input for Splunk",
+        "computers": {
+            "description": "Fetch all computers registered in JAMF",
             "parameters": {
-                "samplequery1": {
-                    "type": "string",
+                "page_limit": {
+                    "type": "text",
                     "required": "True",
                     "encrypted": "True",
-                    "default": "None"
-                },
-                "samplequery2": {
-                    "type": "string",
-                    "required": "True",
-                    "encrypted": "True",
-                    "default": "None"
+                    "default": "None",
+                    "help": "Pagination limit, fetch X max records per request"
                 }
             }
         },
-        "testinput2": {
-            "description": "A test input for Splunk",
+        "mobiledevices": {
+            "description": "Fetch all computers registered in JAMF",
             "parameters": {
-                "samplequery": {
-                    "type": "string",
+                "page_limit": {
+                    "type": "text",
                     "required": "True",
                     "encrypted": "True",
-                    "default": "None"
+                    "default": "None",
+                    "help": "Pagination limit, fetch X max records per request"
                 }
             }
         }

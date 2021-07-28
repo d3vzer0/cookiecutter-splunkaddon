@@ -149,8 +149,8 @@
                                     "errorMsg": "Length should be between 1 and 200"
                                 }
                             ]
-                        },
-                        {% endfor -%}
+                        }{% if not loop.last %},{% endif %}
+                        {% endfor %}
                     ]
                 }
             ]
@@ -195,18 +195,6 @@
                         "label": "Status"
                     },
                     {
-                        "field": "text",
-                        "label": "Text"
-                    },
-                    {
-                        "field": "password",
-                        "label": "Password"
-                    },
-                    {
-                        "field": "dropdown_list",
-                        "label": "Dropdown List"
-                    },
-                    {
                         "field": "global_account",
                         "label": "Global Account"
                     }
@@ -219,9 +207,10 @@
                 ]
             },
             "services": [
+                {%- for input, details in cookiecutter.addon_inputs.items() %}
                 {
-                    "name": "example_input_title",
-                    "title": "example_input_title",
+                    "name": "{{ input }}",
+                    "title": "{{ input }}",
                     "entity": [
                         {
                             "field": "name",
@@ -277,61 +266,23 @@
                                 }
                             ]
                         },
+                        {% for parameter, options in details.parameters.items() %}
                         {
-                            "field": "text",
-                            "label": "Text",
-                            "help": "",
-                            "required": false,
-                            "type": "text",
+                            "field": "{{ parameter }}",
+                            "label": "{{ parameter }}",
+                            "help": "{{ options.help }}",
+                            "required": {% if options.required == "True" %}true{% else %}false{% endif %},
+                            "type": "{{ options.type }}",
                             "validators": [
                                 {
                                     "type": "string",
-                                    "minLength": 0,
-                                    "maxLength": 8192,
-                                    "errorMsg": "Max length of text input is 8192"
+                                    "minLength": 1,
+                                    "maxLength": 80,
+                                    "errorMsg": "Length should be between 1 and 80."
                                 }
                             ]
                         },
-                        {
-                            "field": "password",
-                            "label": "Password",
-                            "help": "",
-                            "required": false,
-                            "type": "text",
-                            "encrypted": true,
-                            "validators": [
-                                {
-                                    "type": "string",
-                                    "minLength": 0,
-                                    "maxLength": 8192,
-                                    "errorMsg": "Max length of password is 8192"
-                                }
-                            ]
-                        },
-                        {
-                            "field": "dropdown_list",
-                            "label": "Dropdown List",
-                            "help": "",
-                            "required": false,
-                            "type": "singleSelect",
-                            "options": {
-                                "disableSearch": true,
-                                "autoCompleteFields": [
-                                    {
-                                        "value": "option1",
-                                        "label": "Option1"
-                                    },
-                                    {
-                                        "value": "option2",
-                                        "label": "Option2"
-                                    },
-                                    {
-                                        "value": "option3",
-                                        "label": "Option3"
-                                    }
-                                ]
-                            }
-                        },
+                        {% endfor %}
                         {
                             "field": "global_account",
                             "label": "Global Account",
@@ -343,7 +294,8 @@
                             }
                         }
                     ]
-                }
+                }{% if not loop.last %},{% endif %}
+                {% endfor %}
             ]
         }
     }

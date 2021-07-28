@@ -44,9 +44,9 @@ fields = [
             min_len=0, 
             max_len=8192, 
         )
-        {% endif -%}
+        {% endif %}
     ),
-    {% endfor %}
+    {% endfor -%}
     field.RestField(
         'global_account',
         required=True,

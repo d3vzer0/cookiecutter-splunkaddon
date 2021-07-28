@@ -1,0 +1,7 @@
+.DS_STORE
+Thumbs.db
+*.py[co]
+appdist/
+metadata/local.meta
+.git
+.venv

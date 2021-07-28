@@ -1,4 +1,4 @@
 <?xml version="1.0"?>
-<view template="TA-example-add-on:templates/base.html" type="html" isDashboard="False">
+<view template="{{ cookiecutter.splunk_addon_name }}:templates/base.html" type="html" isDashboard="False">
     <label>Configuration</label>
 </view>
