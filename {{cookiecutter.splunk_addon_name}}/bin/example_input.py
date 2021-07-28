@@ -54,6 +54,12 @@ class ModInput{{input.name}}(modinput_wrapper.base_modinput.BaseModInput):
             required_on_edit=False)
         )
         {% endfor %}
+        scheme.add_argument(smi.Argument("global_account",
+            title="global_account",
+            description="Global account used",
+            required_on_create=False,
+            required_on_edit=False)
+        )
         return scheme
 
     def get_app_name(self):
