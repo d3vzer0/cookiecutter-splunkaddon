@@ -1,0 +1,20 @@
+<form class="form-horizontal form-complex">
+  {% for parameter, options in input.details.parameters.items() %}
+  <div class="control-group">
+    <label class="control-label" for="{{ input.name }}_{{ parameter }}">
+      {{ options.label }} <span class="required">*</span>
+    </label>
+    <div class="controls">
+    {%- if options.type == "options" %}
+      <select name="action.{{ input.name }}.param.{{ parameter }}" id="{{ input.name }}_{{ parameter }}">
+        {% for option in options.options -%}
+        <option value="{{ option }}">{{ option }}</option>
+        {% endfor -%}
+      </select>
+      {% else %}
+      <input type="text" name="action.{{ input.name }}.param.{{ parameter }}" id="{{ input.name }}_{{ parameter }}"/>
+    {%- endif %}
+    </div>
+  </div>
+  {% endfor %}
+</form>
